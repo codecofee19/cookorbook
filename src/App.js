@@ -1,22 +1,15 @@
-import logo from './logo.svg';
+import AddMeal from './AddMeal';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Cook or Book!</h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          This is an interactive way to way to choose the best option for a meal! Simply enter what you want to eat below and the site will provide a suggestion on the best option!
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <AddMeal/>
       </header>
     </div>
   );
