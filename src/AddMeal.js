@@ -63,7 +63,6 @@ const AddMeal = function() {
 
     const handleSubmit =  async function (event) {
         event.preventDefault();
-        setPrice(0);
         let newresult = {meal:query};
         let newprice  = await generateMeal(newresult);
         
@@ -81,7 +80,7 @@ const AddMeal = function() {
         <br/><input type="submit" id="submitmeal" name="submitmeal"/>
         {delivermeal > 0 && <p>You paid ${delivermeal} to have this delivered.</p>}
         {price > 0 && <p>In comparison, if you were to get the ingredients for this meal from Walmart it would cost on average: ${price}</p>}
-        {price && delivermeal && <p>The verdict is in you should go with {price < delivermeal ? "going to Walmart and getting the stuff." : "having it delivered"} </p>}
+        {price > 0 && delivermeal > 0 && <p>The verdict is in you should go with {price < delivermeal ? "going to Walmart and getting the stuff." : "having it delivered"} </p>}
         </form>
         ); 
 }
