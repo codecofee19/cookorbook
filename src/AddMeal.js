@@ -77,7 +77,7 @@ const AddMeal = function() {
         <input type="text" id="meal" name="meal" value={query} onChange={(e) => setQuery(e.target.value)}/>
         <br/><label htmlFor="delivery">Now, enter how much you paid having this meal <em>delivered:</em> </label>
         <input type="text" id="delivery" name="delivery" value={delivermeal} onChange={(e) => setDeliver(e.target.value)}/>
-        <br/><input type="submit" id="submitmeal" name="submitmeal"/>
+        <br/>< input type="submit" id="submitmeal" className = "submitmeal" name="submitmeal"/>
         {delivermeal > 0 && <p>You paid ${delivermeal} to have this delivered.</p>}
         {price > 0 && <p>In comparison, if you were to get the ingredients for this meal from Walmart it would cost on average: ${price}</p>}
         {price > 0 && delivermeal > 0 && <p>The verdict is in you should go with {price < delivermeal ? "going to Walmart and getting the stuff." : "having it delivered"} </p>}
