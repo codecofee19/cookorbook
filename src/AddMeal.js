@@ -1,11 +1,17 @@
 import { useState } from "react";
+import axios from "axios";
+
+
 
 const AddMeal = function() {
-    const emptyresult = {meal:"",};
+    const emptyresult = 0;
+
+    const emptyprice = 0;
 
     const [query, setQuery] = useState("");
   
-    const [result, setResult] = useState(emptyresult)
+    const [price, setPrice] = useState(emptyprice);
+
 
     const mealMaps = {
      "spaghetti": ["spaghetti", "pasta sauce"],
@@ -13,21 +19,54 @@ const AddMeal = function() {
      "bbq": ["brisket"],
      "taco": ["ground beef", "taco shells", "lettuce", "salsa", "shredded cheese", "roma tomato"],
      "sandwhich": ["bread", "lettuce", "tomato"], 
+     "salad": ["salad", "salad dressing"],
+     "toast": ["bread", "butter"]
     }
 
+
+   
+
+
+
+
+
+    const fillerWords = ["and", "a", "with"];
+
     
-    const generateMeal = function(result) {
+    const generateMeal = async function(result) { 
     const {meal} = result;
-    console.log(meal.split(" "));
+    let ingredients = meal.toLowerCase().trim();
+    let ingredient_list = ingredients.split(/\s+/);
+    const query_list = ingredient_list.flatMap((str) =>  {
+        str = mealMaps[str] || str;
+        return str;
+    })
+    
+  
+    console.log(query_list);
+    const endpoint = "https://localhost:9000/getprice/" + query_list;
+   
+    console.log(endpoint);
+    const res = await axios.get(endpoint);
+   
+    console.log(res.data.price);
+    
+    setPrice(res.data.price);
+
+    
+
     }
     
 
 
-    const handleSubmit = function (event) {
+    const handleSubmit =  async function (event) {
         event.preventDefault();
+        setPrice(0);
         let newresult = {meal:query};
-        generateMeal(newresult);
-        setResult((result) => ({...result, ...newresult}))
+        let newprice  = await generateMeal(newresult);
+        
+        
+        
     }
 
     
@@ -37,7 +76,7 @@ const AddMeal = function() {
         <label htmlFor="meal">Enter what kind of meal you want! </label>
         <input type="text" id="meal" name="meal" value={query} onChange={(e) => setQuery(e.target.value)}/>
         <input type="submit" id="submitmeal" name="submitmeal"/>
-        {result.meal && <p>Results: {result.meal}</p>}
+        {price > 0 && <p>If you were to get these ingredients from Walmart it would cost on average: ${price}</p>}
         </form>); 
 }
 
