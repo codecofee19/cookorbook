@@ -46,7 +46,7 @@ const AddMeal = function() {
     
   
     console.log(query_list);
-    const endpoint = "https://cook-or-book22.herokuapp.com/" + query_list;
+    const endpoint = "https://cook-or-book22.herokuapp.com/getprice/" + query_list;
    
     console.log(endpoint);
     const res = await axios.get(endpoint);
