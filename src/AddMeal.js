@@ -9,6 +9,8 @@ const AddMeal = function() {
     const emptyprice = 0;
 
     const [query, setQuery] = useState("");
+
+    const [delivermeal, setDeliver] = useState("");
   
     const [price, setPrice] = useState(emptyprice);
 
@@ -65,19 +67,23 @@ const AddMeal = function() {
         let newresult = {meal:query};
         let newprice  = await generateMeal(newresult);
         
-        
-        
     }
 
     
     
-    return ( <form
+    return ( 
+        <form
         onSubmit={handleSubmit}>
-        <label htmlFor="meal">Enter what kind of meal you want! </label>
+        <label htmlFor="meal">Enter what kind of meal you want to eat: </label>
         <input type="text" id="meal" name="meal" value={query} onChange={(e) => setQuery(e.target.value)}/>
-        <input type="submit" id="submitmeal" name="submitmeal"/>
-        {price > 0 && <p>If you were to get these ingredients from Walmart it would cost on average: ${price}</p>}
-        </form>); 
+        <br/><label htmlFor="delivery">Now, enter how much you paid having this meal <em>delivered:</em> </label>
+        <input type="text" id="delivery" name="delivery" value={delivermeal} onChange={(e) => setDeliver(e.target.value)}/>
+        <br/><input type="submit" id="submitmeal" name="submitmeal"/>
+        {delivermeal && <p>You paid ${delivermeal} to have this delivered.</p>}
+        {price > 0 && <p>In comparison, if you were to get the ingredients for this meal from Walmart it would cost on average: ${price}</p>}
+        {price && delivermeal && <p>The verdict is in you should go with {price < delivermeal ? "going to Walmart and getting the stuff." : "having it delivered"} </p>}
+        </form>
+        ); 
 }
 
 export default AddMeal;
