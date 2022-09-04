@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 const AddMeal = function() {
-    const emptyresult = 0;
+    
 
     const emptyprice = 0;
 
